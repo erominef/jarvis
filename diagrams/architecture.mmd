@@ -1,4 +1,6 @@
-User["👤 User (Telegram)"]
+graph TD;
+
+    User["👤 User (Telegram)"]
     Bot["grammY Telegram Bot\n(interface/telegram.ts)"]
     Agent["Agent Loop\n(core/agent.ts)"]
     Classify["Classifier\nSIMPLE / STANDARD / REASONING\n+ needsTools gate"]
@@ -14,14 +16,14 @@ User["👤 User (Telegram)"]
     Memory["memory_read / write"]
     MCP["search_knowledge_base\n(MCP SSE client)"]
     KB["Montegallo KB\n(external MCP server)\n~5k document chunks"]
-graph TD;   
+
     User -->|"message"| Bot
     Bot -->|"text + history"| Agent
     Agent --> Classify
     Classify -->|"tier + needsTools"| Router
     Router -->|"fast tasks"| PC
     Router -->|"deep reasoning"| Xeon
-    Agent <-->|"tool calls"| ToolReg
+    Agent <--> |"tool calls"| ToolReg
     ToolReg --> Tools
     Tools --> WebFetch
     Tools --> Shell
@@ -37,4 +39,3 @@ graph TD;
     style Xeon fill:#3a1e5f,color:#fff
     style KB fill:#1e5f3a,color:#fff
     style User fill:#5f3a1e,color:#fff
-```
