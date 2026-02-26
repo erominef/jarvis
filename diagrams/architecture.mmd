@@ -1,22 +1,6 @@
 ```mermaid
 graph TD
-    User["👤 User (Telegram)"]
-    Bot["grammY Telegram Bot\n(interface/telegram.ts)"]
-    Agent["Agent Loop\n(core/agent.ts)"]
-    Classify["Classifier\nSIMPLE / STANDARD / REASONING\n+ needsTools gate"]
-    Router["Router\n(core/router.ts)"]
-    ToolReg["Tool Registry\n(tools/registry.ts)"]
-
-    PC["Ubuntu PC — i7-6700\nOllama :11434\nqwen3:0.6b / 4b\nqwen2.5:7b"]
-    Xeon["Xeon — 2×X5670\nOllama :11434\nqwen3:14b\ndeepseek-r1:7b / 14b"]
-
-    Tools["Tools"]
-    WebFetch["web_fetch"]
-    Shell["shell_run"]
-    Memory["memory_read / write"]
-    MCP["search_knowledge_base\n(MCP SSE client)"]
-    KB["Montegallo KB\n(external MCP server)\n~5k document chunks"]
-
+    
     User -->|"message"| Bot
     Bot -->|"text + history"| Agent
     Agent --> Classify
