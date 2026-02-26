@@ -1,0 +1,26 @@
+services:
+  agent:
+    build: .
+    # network_mode: host gives the container direct access to the host's localhost.
+    # This means http://localhost:11434 inside the container IS the host's Ollama.
+    # No port forwarding or NAT — important for latency on CPU inference.
+    network_mode: host
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # Persist workspace (memory files, logs) across container restarts
+      - ./workspace:/app/workspace
+    # Optional: resource limits
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '4'
+    #       memory: 4G
+
+  # Optional: add a second container for a different interface (e.g., SMS webhook)
+  # sms-webhook:
+  #   build: .
+  #   command: node dist/interfaces/twilio.js
+  #   network_mode: host
+  #   restart: unless-stopped
+  #   env_file: .env
